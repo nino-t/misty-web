@@ -1,5 +1,6 @@
 import App from './app'
 
+import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import loggerMiddleware from './middlewares/logger'
 import DefaultController from './controllers/default.controller'
@@ -16,6 +17,7 @@ const app = new App({
     new DefaultController()
   ],
   middlewares: [
+    cors(),
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),
     loggerMiddleware,

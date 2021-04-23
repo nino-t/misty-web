@@ -7,8 +7,11 @@ module.exports = {
   mode: 'development',
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    './app/app.js',
+    './app/app.tsx',
   ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/static',
@@ -33,6 +36,19 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["ts-loader"]
+      },
+      {
+        test: /\.(css|scss)$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+        use: ["file-loader"],
+      }
     ],
   },
 };
