@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "concurrently --kill-others \"yarn watch:server\" \"yarn watch:client\"",
     "watch:server": "cross-env NODE_ENV=development nodemon --watch './**/*.ts' --exec 'ts-node' server/index.ts",
-    "watch:client": "./node_modules/.bin/webpack --mode=development --watch",
-    "start": "ts-node dist/server/index.js",
-    "build": "tsc -p ."
+    "watch:client": "./node_modules/.bin/webpack --watch",
+    "start": "cross-env NODE_ENV=production ts-node dist/server/index.js",
+    "build": "concurrently \"yarn build:server\" \"yarn build:client\"",
+    "build:server": "tsc -p server",
+    "build:client": "./node_modules/.bin/webpack"
   },
   "keywords": [],
   "author": "",
