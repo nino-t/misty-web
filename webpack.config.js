@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin')
+const ESLintPlugin = require("eslint-webpack-plugin")
 
 const nodeENV = process.env.NODE_ENV || 'development'
 const isProductionMode = ['staging', 'production'].indexOf(nodeENV) >= 0
@@ -30,6 +31,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
+    }),
     new HtmlWebpackPlugin({
       template: './app/index.pug',
       filename: './index.pug',
