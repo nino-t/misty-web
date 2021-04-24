@@ -1,6 +1,7 @@
 {
   "editor.tabSize": 2,
   "eslint.workingDirectories": ["../app", "../server"],
+  "css.lint.unknownAtRules": "ignore",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

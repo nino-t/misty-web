@@ -1,3 +1,4 @@
+import './app.css'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
@@ -7,6 +8,7 @@ const App = () => {
   return (
     <div>
       <Button />
+      <h1 className="bg-red-900 text-white">Hello world</h1>
       <div>WELCOME TO REACT APP</div>
     </div>
   )
