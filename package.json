@@ -17,13 +17,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "pretty-quick --staged"
     }
-  },
-  "lint-staged": {
-    "*/**/*.{js,ts,tsx}": [
-      "./node_modules/.bin/eslint --quiet"
-    ]
   },
   "keywords": [],
   "author": "",
