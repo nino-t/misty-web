@@ -3,20 +3,20 @@ import { Request, Response } from 'express'
 import IControllerBase from '../interfaces/IControllerBase.interface'
 
 class DefaultController implements IControllerBase {
-  public path = '*'
-  public router = express.Router()
+  public path = '*';
+  public router = express.Router();
 
-  constructor() {
+  constructor () {
     this.initRoutes()
   }
 
-  public initRoutes() {
+  public initRoutes () {
     this.router.get(this.path, this.index)
   }
 
   index = (req: Request, res: Response) => {
     res.render('../dist/index')
-  }
+  };
 }
 
 export default DefaultController

@@ -10,7 +10,14 @@
     "start": "cross-env NODE_ENV=production ts-node dist/server/index.js",
     "build": "concurrently \"yarn build:server\" \"yarn build:client\"",
     "build:server": "tsc -p server",
-    "build:client": "./node_modules/.bin/webpack"
+    "build:client": "./node_modules/.bin/webpack",
+    "prettier:server": "./node_modules/.bin/prettier --config .prettierrc.json --write server/**/*.ts",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "keywords": [],
   "author": "",
@@ -36,14 +43,26 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/webpack-env": "^1.16.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
+    "eslint": "^7.24.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "html-webpack-pug-plugin": "^3.0.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.7",
+    "prettier": "2.2.1",
+    "pretty-quick": "^3.1.0",
     "style-loader": "^2.0.0",
+    "ts-jest": "^26.5.5",
     "ts-loader": "^9.1.0",
     "ts-node": "^9.1.1",
     "webpack": "^5.35.0",

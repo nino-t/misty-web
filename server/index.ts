@@ -6,14 +6,12 @@ import loggerMiddleware from './middlewares/logger'
 import DefaultController from './controllers/default.controller'
 
 const nodeENV = process.env.NODE_ENV || 'development'
-const isProductionMode = ['staging', 'production'].indexOf(nodeENV) >= 0 ? true : false
+const isProductionMode = ['staging', 'production'].indexOf(nodeENV) >= 0
 
 let devMiddlewares: any = []
 if (isProductionMode === false) {
   const webpack = require('webpack')
-  const webpackConfig = require(process.env.WEBPACK_CONFIG
-    ? process.env.WEBPACK_CONFIG
-    : '../webpack.config')
+  const webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : '../webpack.config')
   const compiler = webpack(webpackConfig)
 
   devMiddlewares = [
@@ -30,9 +28,7 @@ if (isProductionMode === false) {
 
 const app = new App({
   port: 5000,
-  controllers: [
-    new DefaultController()
-  ],
+  controllers: [new DefaultController()],
   middlewares: [
     cors(),
     bodyParser.json(),
