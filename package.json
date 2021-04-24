@@ -21,8 +21,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --fix"
+    "*/**/*.{js,ts,tsx}": [
+      "./node_modules/.bin/eslint --fix"
     ]
   },
   "keywords": [],
