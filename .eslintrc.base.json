@@ -16,6 +16,5 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "space-before-function-paren": ["error", "always"]
   }
 }

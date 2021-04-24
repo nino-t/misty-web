@@ -6,7 +6,7 @@ class DefaultController implements IControllerBase {
   public path = '*'
   public router = express.Router()
 
-  constructor () {
+  constructor() {
     this.initRoutes()
   }
 

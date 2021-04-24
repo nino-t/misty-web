@@ -17,12 +17,12 @@ if (isProductionMode === false) {
   devMiddlewares = [
     ...devMiddlewares,
     require('webpack-dev-middleware')(compiler, {
-      publicPath: webpackConfig.output.publicPath
+      publicPath: webpackConfig.output.publicPath,
     }),
     require('webpack-hot-middleware')(compiler, {
       path: '/__webpack_hmr',
-      heartbeat: 10 * 1000
-    })
+      heartbeat: 10 * 1000,
+    }),
   ]
 }
 
@@ -34,8 +34,8 @@ const app = new App({
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),
     loggerMiddleware,
-    ...devMiddlewares
-  ]
+    ...devMiddlewares,
+  ],
 })
 
 app.listen()

@@ -13,7 +13,7 @@
     "build:client": "./node_modules/.bin/webpack",
     "prettier:server": "./node_modules/.bin/prettier --config .prettierrc.json --write server/**/*.ts",
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet"
+    "lint": "./node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "husky": {
     "hooks": {
