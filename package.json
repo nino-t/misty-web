@@ -22,7 +22,7 @@
   },
   "lint-staged": {
     "*/**/*.{js,ts,tsx}": [
-      "./node_modules/.bin/eslint --fix"
+      "./node_modules/.bin/eslint --quiet"
     ]
   },
   "keywords": [],
