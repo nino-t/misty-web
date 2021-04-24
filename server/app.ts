@@ -2,8 +2,8 @@ import * as express from 'express'
 import { Application } from 'express'
 
 class App {
-  public app: Application;
-  public port: number;
+  public app: Application
+  public port: number
 
   constructor (appInit: { port: number; middlewares: any; controllers: any }) {
     this.app = express()

@@ -1,4 +1,7 @@
 {
   "editor.tabSize": 2,
-  "eslint.workingDirectories": ["../app", "../server"]
+  "eslint.workingDirectories": ["../app", "../server"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

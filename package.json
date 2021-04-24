@@ -12,12 +12,18 @@
     "build:server": "tsc -p server",
     "build:client": "./node_modules/.bin/webpack",
     "prettier:server": "./node_modules/.bin/prettier --config .prettierrc.json --write server/**/*.ts",
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -49,9 +55,11 @@
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
     "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
