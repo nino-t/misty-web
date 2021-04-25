@@ -16,5 +16,12 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": ["warn", {
+      "allowArgumentsExplicitlyTypedAsAny": true
+    }],
+    "@typescript-eslint/no-explicit-any": ["off", {
+      "fixToUnknown": false,
+      "ignoreRestArgs": false
+    }]
   }
 }

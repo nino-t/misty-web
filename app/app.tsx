@@ -1,21 +1,32 @@
 import './app.css'
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
+import history from './utils/history'
 
-import Button from './components/Button'
+import App from './containers/App'
 
-const App = () => {
-  return (
-    <div>
-      <Button />
-      <h1 className="bg-red-900 text-white">Hello world</h1>
-      <div>WELCOME TO REACT APP</div>
-    </div>
+import configureStore from './configureStore'
+
+const initialState = {}
+const store = configureStore(initialState, history)
+const MOUNT_NODE = document.getElementById('root')
+
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </Provider>,
+    MOUNT_NODE
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
-
 if (module.hot) {
   module.hot.accept()
+  render()
+} else {
+  render()
 }

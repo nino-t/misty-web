@@ -7,19 +7,25 @@ const ESLintPlugin = require("eslint-webpack-plugin")
 const nodeENV = process.env.NODE_ENV || 'development'
 const isProductionMode = ['staging', 'production'].indexOf(nodeENV) >= 0
 
+let devEntries = []
 let devWebpackPlugins = []
+
 if (isProductionMode === false) {
   devWebpackPlugins = [
     ...devWebpackPlugins,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]
+
+  devEntries = [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
+  ]
 }
 
 module.exports = {
   mode: isProductionMode ? 'production' : 'development',
   entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    ...devEntries,
     './app/app.tsx'
   ],
   resolve: {

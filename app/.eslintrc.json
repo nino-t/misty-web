@@ -16,6 +16,13 @@
       "imports": "never",
       "exports": "never",
       "functions": "never"
+    }],
+    "@typescript-eslint/no-explicit-any": ["off", {
+      "fixToUnknown": false,
+      "ignoreRestArgs": false
+    }],
+    "react/display-name": ["off", {
+      "ignoreTranspilerName": false
     }]
   },
   "settings": {
