@@ -24,6 +24,9 @@ const appReducer = (state = initialState, action: any): any =>
         draft.error = action.error
         draft.loading = false
         break
+
+      default:
+        return state
     }
   })
 

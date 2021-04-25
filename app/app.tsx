@@ -7,17 +7,21 @@ import history from './utils/history'
 
 import App from './containers/App'
 
+import { HelmetProvider } from 'react-helmet-async'
+
 import configureStore from './configureStore'
 
 const initialState = {}
 const store = configureStore(initialState, history)
-const MOUNT_NODE = document.getElementById('root')
+const MOUNT_NODE = document.getElementById('root') as HTMLElement
 
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </ConnectedRouter>
     </Provider>,
     MOUNT_NODE

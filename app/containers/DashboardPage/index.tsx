@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class DashboardPage extends React.Component {
   render(): JSX.Element {
@@ -34,6 +35,10 @@ class DashboardPage extends React.Component {
             Example of blockquote - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc
             commodo posuere et sit amet ligula.
           </blockquote>
+
+          <Link to="/todos" className="text-center">
+            Open Todos
+          </Link>
         </div>
       </div>
     )
