@@ -1,7 +1,10 @@
+import { createInjectorsEnhancer, forceReducerReload } from 'redux-injectors'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import createSagaMiddleware from 'redux-saga'
+
 import createReducer from './reducers'
+import { InjectedStore, ApplicationRootState } from './types'
 
 declare global {
   interface Window {
@@ -9,7 +12,10 @@ declare global {
   }
 }
 
-export default function configureStore(initialState = {}, history: any): any {
+export default function configureStore(
+  initialState: ApplicationRootState | Record<string, any> = {},
+  history: any
+): any {
   let composeEnhancers = compose
   // const reduxSagaMonitorOptions = {}
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
@@ -17,23 +23,28 @@ export default function configureStore(initialState = {}, history: any): any {
   }
 
   const sagaMiddleware = createSagaMiddleware()
+  const { run: runSaga } = sagaMiddleware
 
   const middlewares = [sagaMiddleware, routerMiddleware(history)]
 
-  const enhancers = [applyMiddleware(...middlewares)]
+  const enhancers = [
+    applyMiddleware(...middlewares),
+    createInjectorsEnhancer({
+      createReducer,
+      runSaga,
+    }),
+  ]
 
-  const store = createStore(createReducer(), initialState, composeEnhancers(...enhancers))
+  const store = createStore(createReducer(), initialState as any, composeEnhancers(...enhancers)) as InjectedStore
 
-  // store.runSaga = sagaMiddleware.run
-  // store.injectedReducers = {}
-  // store.injectedSagas = {}
+  store.runSaga = sagaMiddleware.run
+  store.injectedReducers = {}
+  store.injectedSagas = {}
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer())
+      forceReducerReload(store)
     })
-  } else {
-    store.replaceReducer(createReducer())
   }
 
   return store
