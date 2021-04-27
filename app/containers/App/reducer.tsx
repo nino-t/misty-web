@@ -1,8 +1,8 @@
 import { ContainerState } from './types'
 
 export const initialState: ContainerState = {
-  loading: false,
-  error: false,
+  isLoading: false,
+  errorMessage: '',
 }
 
 const appReducer = (state: ContainerState = initialState, action: any): any => {

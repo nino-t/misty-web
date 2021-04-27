@@ -1,8 +1,8 @@
 /* --- STATE --- */
 
 interface AppState {
-  readonly loading: boolean
-  readonly error?: Record<string, any> | boolean
+  readonly isLoading: boolean
+  readonly errorMessage: string
 }
 
 /* --- EXPORTS --- */

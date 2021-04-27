@@ -1,9 +1,11 @@
 import { ActionType } from 'typesafe-actions'
-import * as actions from './actions'
+
+import * as actions from '../actions'
+import { TodosServiceInterface as TodosService } from './todo'
 
 /* --- STATE --- */
 interface TodoState {
-  readonly todos: any[]
+  readonly todos: TodosService
 }
 
 /* --- ACTIONS --- */

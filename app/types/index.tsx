@@ -4,7 +4,7 @@ import { Saga } from 'redux-saga'
 import { SagaInjectionModes } from 'redux-injectors'
 
 import { ContainerState as AppState } from '../containers/App/types'
-import { ContainerState as TodoState } from '../containers/TodoPage/types'
+import { ContainerState as TodoContainerState } from '../containers/TodoPage/types'
 
 export interface InjectedStore extends Store {
   injectedReducers: any
@@ -26,7 +26,7 @@ export interface InjectSagaParams {
 export interface ApplicationRootState {
   readonly router: RouterState
   readonly global: AppState
-  readonly todo: TodoState
+  readonly todoContainer: TodoContainerState
 
   // For testing purposes
   readonly test: any

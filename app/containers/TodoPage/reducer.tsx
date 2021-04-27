@@ -3,22 +3,36 @@ import { ContainerState, ContainerActions } from './types'
 import { LOAD_TODOS_SUCCESS, LOAD_TODOS, LOAD_TODOS_ERROR } from './constants'
 
 export const initialState: ContainerState = {
-  todos: [],
+  todos: {
+    meta: {
+      isLoading: false,
+      errorMessage: '',
+    },
+    results: [],
+  },
 }
 
 const appReducer = (state: ContainerState = initialState, action: ContainerActions): ContainerState =>
   produce(state, (draft) => {
     switch (action.type) {
       case LOAD_TODOS:
-        draft.todos = []
+        draft.todos.meta.isLoading = true
+        draft.todos.meta.errorMessage = ''
         break
 
       case LOAD_TODOS_SUCCESS:
-        draft.todos = action.payload.todos
+        const { results } = action.payload
+
+        draft.todos.meta.isLoading = false
+        draft.todos.results = results
+        draft.todos.meta.errorMessage = ''
         break
 
       case LOAD_TODOS_ERROR:
-        draft.todos = []
+        const { errorMessage } = action.payload
+
+        draft.todos.meta.isLoading = false
+        draft.todos.meta.errorMessage = errorMessage
         break
 
       default:

@@ -8,14 +8,15 @@ import { useInjectReducer, useInjectSaga } from '../../utils/redux-injectors'
 import { loadTodos } from './actions'
 import { ContainerState } from './types'
 import { makeSelectTodos } from './selectors'
+import { TodosServiceInterface } from './types/todo'
 
 import saga from './saga'
 import reducer from './reducer'
 
-const key = 'todo'
+const key = 'todoContainer'
 
 type DesiredSelection = {
-  todos: any[]
+  todos: TodosServiceInterface
 }
 
 const stateSelector = createStructuredSelector<ContainerState, DesiredSelection>({
@@ -35,8 +36,6 @@ const TodoPage = (): JSX.Element => {
     if (evt !== undefined && evt.preventDefault) {
       evt.preventDefault()
     }
-
-    console.log('Ajax Call =>', accessToken)
 
     if (!accessToken) {
       return
@@ -83,9 +82,9 @@ const TodoPage = (): JSX.Element => {
             </div>
           </div>
           <div>
-            {todos && todos.length > 0 ? (
+            {todos.results.length > 0 ? (
               <>
-                {todos.map((todo, index) => (
+                {todos.results.map((todo, index) => (
                   <div className="flex mb-4 items-center" key={index}>
                     <p className="w-full text-gray-800">{todo.description}</p>
                     <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-white bg-green-500 hover:bg-green-600">
