@@ -17,12 +17,12 @@ export default function configureStore(
   history: any
 ): any {
   let composeEnhancers = compose
-  // const reduxSagaMonitorOptions = {}
-  if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
+  const reduxSagaMonitorOptions = {}
+  if (process.env.APP_ENV !== 'production' && typeof window === 'object') {
     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   }
 
-  const sagaMiddleware = createSagaMiddleware()
+  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions)
   const { run: runSaga } = sagaMiddleware
 
   const middlewares = [sagaMiddleware, routerMiddleware(history)]

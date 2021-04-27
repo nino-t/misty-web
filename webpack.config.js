@@ -1,10 +1,12 @@
+require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin')
 const ESLintPlugin = require("eslint-webpack-plugin")
 
-const nodeENV = process.env.NODE_ENV || 'development'
+const nodeENV = process.env.APP_ENV || 'development'
 const isProductionMode = ['staging', 'production'].indexOf(nodeENV) >= 0
 
 let devEntries = []
@@ -46,6 +48,7 @@ module.exports = {
       minify: false
     }),
     new HtmlWebpackPugPlugin(),
+    new Dotenv(),
     ...devWebpackPlugins
   ],
   module: {
