@@ -5,9 +5,9 @@ const selectGlobal = (state: any): any => state.global || initialState
 
 const selectRouter = (state: any): any => state.router
 
-const makeSelectLoading = (): any => createSelector(selectGlobal, (globalState) => globalState.loading)
+const makeSelectLoading = (): any => createSelector(selectGlobal, (globalState) => globalState.isLoading)
 
-const makeSelectError = (): any => createSelector(selectGlobal, (globalState) => globalState.error)
+const makeSelectError = (): any => createSelector(selectGlobal, (globalState) => globalState.errorMessage)
 
 const makeSelectLocation = (): any => createSelector(selectRouter, (routerState) => routerState.location)
 

@@ -1,6 +1,6 @@
+import { Saga } from 'redux-saga'
 import { Reducer, Store } from 'redux'
 import { RouterState } from 'connected-react-router'
-import { Saga } from 'redux-saga'
 import { SagaInjectionModes } from 'redux-injectors'
 
 import { ContainerState as AppState } from '../containers/App/types'
