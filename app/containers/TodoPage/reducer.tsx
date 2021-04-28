@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { ContainerState, ContainerActions } from './types'
-import { LOAD_TODOS_SUCCESS, LOAD_TODOS, LOAD_TODOS_ERROR } from './constants'
+import { LOAD_TODOS_SUCCESS, LOAD_TODOS, LOAD_TODOS_ERROR, ADD_TODO_SUCCESS } from './constants'
 
 export const initialState: ContainerState = {
   todos: {
@@ -12,7 +12,7 @@ export const initialState: ContainerState = {
   },
 }
 
-const appReducer = (state: ContainerState = initialState, action: ContainerActions): ContainerState =>
+const todoReducer = (state: ContainerState = initialState, action: ContainerActions): ContainerState =>
   produce(state, (draft) => {
     switch (action.type) {
       case LOAD_TODOS:
@@ -35,9 +35,15 @@ const appReducer = (state: ContainerState = initialState, action: ContainerActio
         draft.todos.meta.errorMessage = errorMessage
         break
 
+      case ADD_TODO_SUCCESS:
+        const { result } = action.payload
+
+        draft.todos.results.push(result)
+        break
+
       default:
         return state
     }
   })
 
-export default appReducer
+export default todoReducer

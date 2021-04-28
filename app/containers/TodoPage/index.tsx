@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { useInjectReducer, useInjectSaga } from '../../utils/redux-injectors'
 
-import { loadTodos } from './actions'
+import { loadTodos, addTodo } from './actions'
 import { ContainerState } from './types'
 import { makeSelectTodos } from './selectors'
 import { TodosServiceInterface } from './types/todo'
 
 import saga from './saga'
 import reducer from './reducer'
+import TodoList from '../TodoList'
 
 const key = 'todoContainer'
 
@@ -31,6 +32,7 @@ const TodoPage = (): JSX.Element => {
 
   const dispatch = useDispatch()
   const [accessToken, setAccessToken] = useState('')
+  const [textTodo, setTextTodo] = useState('')
 
   const onSubmitForm = (evt?: any) => {
     if (evt !== undefined && evt.preventDefault) {
@@ -42,6 +44,24 @@ const TodoPage = (): JSX.Element => {
     }
 
     dispatch(loadTodos(accessToken))
+  }
+
+  const onSubmitNewTodo = (evt?: any) => {
+    if (evt !== undefined && evt.preventDefault) {
+      evt.preventDefault()
+    }
+
+    if (!textTodo && !accessToken) {
+      return
+    }
+
+    dispatch(
+      addTodo({
+        accessToken,
+        description: textTodo,
+      })
+    )
+    setTextTodo('')
   }
 
   return (
@@ -69,39 +89,24 @@ const TodoPage = (): JSX.Element => {
         </div>
 
         <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
-          <div className="mb-4">
+          <form className="mb-4" onSubmit={onSubmitNewTodo}>
             <h1 className="text-gray-800">Todo List</h1>
             <div className="flex mt-4">
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-900"
                 placeholder="Add Todo"
+                onChange={(e) => setTextTodo(e.target.value)}
+                value={textTodo}
               />
-              <button className="flex-no-shrink p-2 border-2 rounded text-white bg-blue-500 hover:bg-blue-600">
+              <button
+                type="submit"
+                className="flex-no-shrink p-2 border-2 rounded text-white bg-blue-500 hover:bg-blue-600"
+              >
                 Add
               </button>
             </div>
-          </div>
-          <div>
-            {todos.results.length > 0 ? (
-              <>
-                {todos.results.map((todo, index) => (
-                  <div className="flex mb-4 items-center" key={index}>
-                    <p className="w-full text-gray-800">{todo.description}</p>
-                    <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-white bg-green-500 hover:bg-green-600">
-                      Done
-                    </button>
-                    <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-white bg-red-500 hover:bg-red-600">
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <div className="py-2 px-3 border-2 text-center text-gray-800 text-base mt-7 block">
-                <p>The data is not yet available</p>
-              </div>
-            )}
-          </div>
+          </form>
+          <TodoList {...todos} />
         </div>
       </div>
     </>
